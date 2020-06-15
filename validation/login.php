@@ -32,12 +32,5 @@ if (isset($_POST['submit'])) {
             $db->close();
             header('Location: /');
         } 
-
-
-
-        //     setcookie("user", $user['username'], time() + 3600, "/");
-        //     $db->close();
-        //     header('Location: /'); 
-        // }
     }
 }

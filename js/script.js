@@ -2,9 +2,8 @@ function handleSubmit() {
 
     let form = document.querySelector('#signup');
 
-    form.addEventListener('submit', function(evt) {
-        evt.preventDefault();
-
+    form.addEventListener('submit', function() {
+     
         let formData = {
             email: document.querySelector('input[name="email"]').value,
             username: document.querySelector('input[name="username"]').value,
@@ -28,8 +27,7 @@ function handleSubmit() {
 function loginSubmit() {
     let form = document.querySelector('#auth');
 
-    form.addEventListener('submit', function(evt) {
-        evt.preventDefault();
+    form.addEventListener('submit', function() {
 
         let formData = {
             username: document.querySelector('input[name="username"]').value,
@@ -54,7 +52,9 @@ function printError(elemId, hintMsg) {
     error.innerHTML = hintMsg;
 }
 
-function validateLoginForm() {
+function validateLoginForm(e) {
+
+    e.preventDefault();
 
     let errorMsg = '<img src="../images/warning.png" />';
     let successMsg = '<img src="../images/check.png" id="success" />';
@@ -64,7 +64,7 @@ function validateLoginForm() {
     const password = document.login.password.value;
     let nameErr = passwordErr = true;
 
-    if (name === "" || name.length < 3) {
+    if (name.trim().length < 3) {
         printError("nameErr", errorMsg);
     } else {
         regex = /^[a-zA-Z\s]+$/;                
@@ -76,7 +76,7 @@ function validateLoginForm() {
         }
     }
     
-    if (password === "" || password.length < 6) {
+    if (password.trim().length < 6) {
         printError("passwordErr", errorMsg);
     } else {
         regex = /^[A-Za-z]\w{6,14}$/;
@@ -92,10 +92,10 @@ function validateLoginForm() {
        loginSubmit();
        return false;
     } 
-    
 };
 
-function validateRegisterForm() {
+function validateRegisterForm(e) {
+    e.preventDefault();
 
     let errorMsg = '<img src="../images/warning.png" id="error-auth" />';
     let successMsg = '<img src="../images/check.png" id="success-auth" />';
@@ -107,7 +107,7 @@ function validateRegisterForm() {
     
     let userErr = emailErr = passErr = true;
         
-    if(name === "" || name.length < 3) {
+    if(name.trim().length < 3) {
         printError("userErr", errorMsg);
     } else {
         regex = /^[a-zA-Z\s]+$/;                
@@ -131,7 +131,7 @@ function validateRegisterForm() {
         }
     }
     
-    if (password === "" || password.length < 6) {
+    if (password.trim().length < 6) {
         printError("passErr", errorMsg);
     } else {
         regex = /^[A-Za-z]\w{6,14}$/;
