@@ -10,7 +10,7 @@
 <body>
     <main>
         <div class="wrap-title">
-            <div class="title">Login To Your Account/ Register New</div>
+            <div class="title">Login To Your Account / Register New</div>
         </div>
         <div class="wrap">
             <div class="form-section">
@@ -21,7 +21,7 @@
                                 <div class="round">
                                     <img src="../images/img.png" class="image" />
                                 </div>
-                                <p class="header-title">Login To Your Account/ Register New</p>
+                                <p class="header-title">Login To Your Account / Register New</p>
                             </div>
                             <div class='form-wrapper'>
                                 <div class='row'>
@@ -36,28 +36,50 @@
                                                     <div class="line"></div>
                                                 </div>  
                                             </div>
-                                            <form class="login-form">
+                                            <form 
+                                                action="./validation/login.php"
+                                                method="post"
+                                                name="login" 
+                                                class="login-form" 
+                                                id="auth" 
+                                                onsubmit="return validateLoginForm()"
+                                            >
                                                 <div class="form-group">
-                                                    <input type="text" name="email" class="form-control" placeholder="User Name">
-                                                    <div class="error" id="emailEr"></div>
+                                                    <input 
+                                                        type="text" 
+                                                        name="username" 
+                                                        class="form-control" 
+                                                        id="name"  
+                                                        placeholder="User Name"
+                                                    >
+                                                    <div class="error" id="nameErr"></div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="password" name="password" class="form-control" placeholder="Password">
-                                                    <div class="error" id="passEr"></div>
+                                                    <input 
+                                                        type="password" 
+                                                        name="password" 
+                                                        id="password"
+                                                        class="form-control" 
+                                                        placeholder="Password"
+                                                    >
+                                                    <div class="error" id="passwordErr"></div>
                                                 </div>
                                                 <div class="text-color btn">
-                                                <div class="poster">
-                                                        <label>Remember Me password</label>
-                                                        <input type="checkbox" id="checkbox-1-1" class="regular-checkbox" />
-                                                </div>
-                                                    <!-- <div class="poster">
-                                                        <label for="check">Remember Me password</label>
-                                                        <input type="checkbox" name="remember" id="remember" />
-                                                        <div class="descr">
-                                                            <p>You no longer need to enter a password every time you use the site</p>
-                                                        </div>
-                                                    </div> -->
-                                                    <button type="submit" name="submit" value="submit" class="login-btn">Login</button>
+                                                    <div class="poster">
+                                                            <label>Remember Me password</label>
+                                                            <input type="checkbox" class="regular-checkbox" name="remember" />
+                                                            <div class="descr">
+                                                                <p>You no longer need to enter <br/> a password every time you use the site</p>
+                                                            </div>
+                                                    </div>
+                                                    <button 
+                                                        type="submit" 
+                                                        name="submit" 
+                                                        value="submit" 
+                                                        class="login-btn"
+                                                    >
+                                                        Login
+                                                    </button>
                                                 </div>
                                             </form>
                                         </div>
@@ -65,21 +87,28 @@
                                     <div class='column'>
                                         <div class='right-column'>
                                             <p class="item">Register</p>
-                                            <form class="register-form">
+                                            <form 
+                                                action="./validation/register.php"
+                                                method="post"
+                                                name="register" 
+                                                id="signup" 
+                                                class="register-form"
+                                                onsubmit="return validateRegisterForm()"
+                                            >
                                                 <div class="form-group text-color">
                                                     <label for="email">Email</label>
                                                     <input type="text" name="email" id="email">
-                                                    <div class="error" id="emailErr"></div>
+                                                    <div class="error-auth" id="emailErr"></div>
                                                 </div>
                                                 <div class="form-group text-color">
-                                                    <label for="name">User Name</label>
-                                                    <input type="text" name="name" id="name">
-                                                    <div class="error" id="nameErr"></div>
+                                                    <label for="username">User Name</label>
+                                                    <input type="text" name="username" id="username">
+                                                    <div class="error-auth" id="userErr"></div>
                                                 </div>
                                                 <div class="form-group text-color">
-                                                    <label for="password">Password</label>
-                                                    <input type="password" name="password" id="password">
-                                                    <div class="error" id="passErr"></div>
+                                                    <label for="pass">Password</label>
+                                                    <input type="password" name="password" id="pass">
+                                                    <div class="error-auth" id="passErr"></div>
                                                 </div>
                                                 <div class="btn-wrap">
                                                     <button type="submit" name="submit" value="submit" class="reg-btn">Register</button>
@@ -95,6 +124,6 @@
             </div>
         </div>
     </main> 
-<script src="js/script.js"></script>
+    <script src="./js/script.js"></script> 
 </body>
 </html>
