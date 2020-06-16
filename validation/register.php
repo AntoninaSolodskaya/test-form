@@ -4,7 +4,7 @@ $username = filter_var(trim($_POST['username']), FILTER_SANITIZE_STRING);
 $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);  
 $email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);  
 
-if (isset($_POST['submit'])) {
+
     if (mb_strlen($email) < 10 || mb_strlen($email) > 40 || !$email || empty($_POST['email']))
     {
        echo "Invalid email .  <a href='/'>Correct mistake</a>";
@@ -25,5 +25,5 @@ if (isset($_POST['submit'])) {
         $db->close(); 
         header('Location: /');
     }
-}
+
 ?>

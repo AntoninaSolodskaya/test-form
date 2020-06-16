@@ -1,109 +1,19 @@
-function handleSubmit() {
-
-    let form = document.querySelector('#signup');
-
-    form.addEventListener('submit', function() {
-     
-        let formData = {
-            email: document.querySelector('input[name="email"]').value,
-            username: document.querySelector('input[name="username"]').value,
-            password: document.querySelector('input[name="password"]').value,
-        };
-
-        let request = new XMLHttpRequest();
-
-        request.addEventListener('load', function() {
-            alert('Success!!!');
-        });
-
-        request.open('POST', '../validation/register.php', true);
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        request.send('email=' + encodeURIComponent(formData.email) + 'username=' + encodeURIComponent(formData.username) + '&password=' + encodeURIComponent(formData.password));
-    })
-   
-}
-
-
-function loginSubmit() {
-    let form = document.querySelector('#auth');
-
-    form.addEventListener('submit', function() {
-
-        let formData = {
-            username: document.querySelector('input[name="username"]').value,
-            password: document.querySelector('input[name="password"]').value,
-        };
-
-        let request = new XMLHttpRequest();
-
-        request.addEventListener('load', function() {
-            alert('Success!!!');
-        });
-
-        request.open('POST', '../validation/login.php', true);
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        request.send('username=' + encodeURIComponent(formData.username) + '&password=' + encodeURIComponent(formData.password));
-    })
-}
-
-
 function printError(elemId, hintMsg) {
     let error = document.getElementById(elemId);
     error.innerHTML = hintMsg;
 }
 
-function validateLoginForm(e) {
+let form = document.getElementById('signup');
 
+form.addEventListener('submit', function(e) {
     e.preventDefault();
-
-    let errorMsg = '<img src="../images/warning.png" />';
-    let successMsg = '<img src="../images/check.png" id="success" />';
-    let regex;
-
-    const name = document.login.username.value;
-    const password = document.login.password.value;
-    let nameErr = passwordErr = true;
-
-    if (name.trim().length < 3) {
-        printError("nameErr", errorMsg);
-    } else {
-        regex = /^[a-zA-Z\s]+$/;                
-        if (regex.test(name) === false) {
-            printError("nameErr", errorMsg);
-        } else {
-            printError("nameErr", successMsg);
-            nameErr = false;
-        }
-    }
-    
-    if (password.trim().length < 6) {
-        printError("passwordErr", errorMsg);
-    } else {
-        regex = /^[A-Za-z]\w{6,14}$/;
-        if (regex.test(password) === false) {
-            printError("passwordErr", errorMsg);
-        } else {
-            printError("passwordErr", successMsg);
-            passwordErr = false;
-        }
-    }
-
-    if ((nameErr || passwordErr ) === true) {
-       loginSubmit();
-       return false;
-    } 
-};
-
-function validateRegisterForm(e) {
-    e.preventDefault();
-
     let errorMsg = '<img src="../images/warning.png" id="error-auth" />';
     let successMsg = '<img src="../images/check.png" id="success-auth" />';
     let regex;
 
-    const name = document.register.username.value;
-    const password = document.register.password.value;
-    const email = document.register.email.value;
+    const name = document.getElementById('username').value;
+    const password = document.getElementById('pass').value;
+    const email = document.getElementById('email').value;
     
     let userErr = emailErr = passErr = true;
         
@@ -143,9 +53,93 @@ function validateRegisterForm(e) {
         }
     }
 
-    if((userErr || emailErr || passErr ) === true) {
-        handleSubmit();
-        return false;
+    let formData = {
+        email: document.getElementById('email').value,
+        username: document.getElementById('username').value,
+        password: document.getElementById('pass').value
+    };
+
+    let request = new XMLHttpRequest();
+
+    request.addEventListener('load', function() {
+        if((userErr = emailErr = passErr) === true){
+            alert('Not Submit!!!');
+        } else {
+            alert('Success!!!');
+        }
+    });
+
+    request.open('POST', '../validation/register.php');
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    request.send('email=' + encodeURIComponent(formData.email) + '&username=' + encodeURIComponent(formData.username) + '&password=' + encodeURIComponent(formData.password));
+
+    if(userErr || emailErr || passErr) {
+        return true; 
+    }
+
+    return false;
+})
+
+
+let formElem = document.getElementById('auth');
+
+formElem.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let errorMsg = '<img src="../images/warning.png" />';
+    let successMsg = '<img src="../images/check.png" id="success" />';
+    let regex;
+
+    const name = document.getElementById('name').value;
+    const password = document.getElementById('password').value;
+    
+    let nameErr = passwordErr = true;
+        
+    if (name.trim().length < 3) {
+        printError("nameErr", errorMsg);
+    } else {
+        regex = /^[a-zA-Z\s]+$/;                
+        if (regex.test(name) === false) {
+            printError("nameErr", errorMsg);
+        } else {
+            printError("nameErr", successMsg);
+            nameErr = false;
+        }
+    }
+    
+    if (password.trim().length < 6) {
+        printError("passwordErr", errorMsg);
+    } else {
+        regex = /^[A-Za-z]\w{6,14}$/;
+        if (regex.test(password) === false) {
+            printError("passwordErr", errorMsg);
+        } else {
+            printError("passwordErr", successMsg);
+            passwordErr = false;
+        }
+    }
+
+    let formData = {
+        username: document.getElementById('name').value,
+        password: document.getElementById('password').value
+    };
+
+    let request = new XMLHttpRequest();
+
+    request.addEventListener('load', function() {
+        if((nameErr = passwordErr) === true){
+            alert('Not Submit!!!');
+        } else {
+            alert('Success!!!');
+        }
+    });
+
+    request.open('POST', '/validation/login.php', true);
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    request.send('username=' + encodeURIComponent(formData.username) + '&password=' + encodeURIComponent(formData.password));
+
+    if (nameErr || passwordErr) {
+        return true;
     } 
-   
-}
+
+    return false;
+});

@@ -5,10 +5,10 @@ $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
 
 if (isset($_POST['submit'])) {
     if (mb_strlen($name) < 3 || mb_strlen($name) > 30 || empty($_POST['username'])) {
-        echo "Invalid name .  <a href='/'>Correct mistake</a>";
+        echo "Invalid name or password .  <a href='/'>Correct mistake</a>";
     }
     if (mb_strlen($password) < 3 || mb_strlen($password) > 40 || empty($_POST['password'])) {
-        echo "Invalid password .  <a href='/'>Correct mistake</a>";
+        echo "Invalid password or name .  <a href='/'>Correct mistake</a>";
     } else {
 
         $password = md5($password . "ghsf2458");
@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
         $check = $_POST['remember'];
 
         if (count($user) == 0) {
-            echo "This user is not define .  <a href='/'>Correct mistake</a>";
+            echo "Invalid name or password .  <a href='/'>Correct mistake</a>";
         } 
 
         if($check)

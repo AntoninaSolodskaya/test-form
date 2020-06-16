@@ -37,12 +37,9 @@
                                                 </div>  
                                             </div>
                                             <form 
-                                                action="./validation/login.php"
-                                                method="post"
                                                 name="login" 
                                                 class="login-form" 
                                                 id="auth" 
-                                                onsubmit="return validateLoginForm()"
                                             >
                                                 <div class="form-group">
                                                     <input 
@@ -87,13 +84,10 @@
                                     <div class='column'>
                                         <div class='right-column'>
                                             <p class="item">Register</p>
-                                            <form 
-                                                action="./validation/register.php"
-                                                method="post"
+                                            <form
                                                 name="register" 
                                                 id="signup" 
-                                                class="register-form"
-                                                onsubmit="return validateRegisterForm()"
+                                                class="register-form" 
                                             >
                                                 <div class="form-group text-color">
                                                     <label for="email">Email</label>
